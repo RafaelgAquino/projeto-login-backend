@@ -1,10 +1,12 @@
 const express = require('express');
+const cors = require('cors'); // <--- 1. Importe o cors aqui
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Middlewares
+app.use(cors()); // <--- 2. Ative o middleware do cors aqui
 app.use(express.json());
 
 // Caminho dos arquivos públicos
@@ -39,7 +41,6 @@ app.post('/api/login', (req, res) => {
         });
     }
 
-    // Não registra nem armazena credenciais.
     return res.status(200).json({
         sucesso: true,
         mensagem: 'Fluxo demonstrativo concluído.'
