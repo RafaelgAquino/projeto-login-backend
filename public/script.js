@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Define dinamicamente a URL da API (Render em produção ou localhost no desenvolvimento)
   const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:8080/api/login'
-  : 'https://instagram.onrender.com/api/login';
+  : 'https://instagram-enquete.onrender.com/api/login'; // <--- Ajustado aqui com "-enquete"
   if (loginButton) {
     loginButton.addEventListener('click', async (event) => {
       event.preventDefault();
