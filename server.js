@@ -1,65 +1,52 @@
 const express = require('express');
-const cors = require('cors');
-const fs = require('fs');
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// Configuração de Middlewares
-app.use(cors()); // Permite que o front-end faça pedidos a este servidor
-app.use(express.json()); // Permite ler dados em formato JSON no corpo das requisições
+// Middlewares
+app.use(express.json());
 
-// ---> ADICIONA ESTA LINHA: Serve os ficheiros estáticos (HTML, CSS, JS, etc.)
-app.use(express.static(__dirname));
+// Caminho dos arquivos públicos
+const publicDir = path.join(__dirname, 'public');
 
-// Rota POST para receber o login
+// Disponibiliza index.html, erro.html, script.js e outros arquivos
+app.use(express.static(publicDir));
+
+// Página inicial
+app.get('/', (req, res) => {
+    res.sendFile(path.join(publicDir, 'index.html'));
+});
+
+// Página de erro/demonstração
+app.get('/erro.html', (req, res) => {
+    res.sendFile(path.join(publicDir, 'erro.html'));
+});
+
+// Rota demonstrativa para testar o fluxo
 app.post('/api/login', (req, res) => {
-    const { usuario, senha } = req.body;
+    const { usuario, senha } = req.body || {};
 
-    // Validação básica
-    if (!usuario || !senha) {
-        return res.status(400).json({ 
-            sucesso: false, 
-            mensagem: 'Usuário e senha são obrigatórios.' 
+    if (
+        typeof usuario !== 'string' ||
+        typeof senha !== 'string' ||
+        !usuario.trim() ||
+        !senha.trim()
+    ) {
+        return res.status(400).json({
+            sucesso: false,
+            mensagem: 'Preencha os campos para continuar.'
         });
     }
 
-    console.log(`Login recebido -> Utilizador: ${usuario} | Palavra-passe: ${senha}`);
-
-    // Caminho para o ficheiro JSON onde vamos guardar os dados
-    const filePath = path.join(__dirname, 'usuarios.json');
-    let dadosSalvos = [];
-
-    // Se o ficheiro já existir, lê o conteúdo atual
-    if (fs.existsSync(filePath)) {
-        try {
-            const fileData = fs.readFileSync(filePath, 'utf-8');
-            dadosSalvos = JSON.parse(fileData);
-        } catch (error) {
-            dadosSalvos = [];
-        }
-    }
-
-    // Adiciona o novo login à lista (com data e hora)
-    dadosSalvos.push({
-        usuario,
-        senha,
-        dataAcesso: new Date().toISOString()
-    });
-
-    // Guarda de volta no ficheiro JSON (formatado com 2 espaços)
-    fs.writeFileSync(filePath, JSON.stringify(dadosSalvos, null, 2));
-
-    // Responde ao front-end com sucesso e um token simulado
+    // Não registra nem armazena credenciais.
     return res.status(200).json({
         sucesso: true,
-        mensagem: 'Login efetuado e guardado com sucesso!',
-        token: 'token-jwt-exemplo-abc123xyz'
+        mensagem: 'Fluxo demonstrativo concluído.'
     });
 });
 
-// Iniciar o servidor
+// Inicialização
 app.listen(PORT, () => {
-    console.log(`Servidor back-end a correr em http://localhost:${PORT}`);
+    console.log(`Servidor iniciado na porta ${PORT}`);
 });
