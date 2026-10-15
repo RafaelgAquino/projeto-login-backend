@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0c0f14;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Lado Esquerdo - Hero / Branding */
+    .left-section {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      position: relative;
+    }
+
+    .instagram-logo {
+      position: absolute;
+      top: 40px;
+      left: 60px;
+      width: 38px;
+      height: 38px;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      text-align: center;
+      max-width: 500px;
+      line-height: 1.2;
+      margin-bottom: 40px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cards-container {
+      position: relative;
+      width: 300px;
+      height: 420px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mock-card {
+      position: absolute;
+      border-radius: 24px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .card-center {
+      width: 220px;
+      height: 380px;
+      background-image: url('https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500&auto=format&fit=crop');
+      z-index: 2;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card-left {
+      width: 180px;
+      height: 320px;
+      background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop');
+      transform: rotate(-12deg) translateX(-80px);
+      z-index: 1;
+      opacity: 0.8;
+    }
+
+    .card-right {
+      width: 180px;
+      height: 320px;
+      background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&auto=format&fit=crop');
+      transform: rotate(12deg) translateX(80px);
+      z-index: 1;
+      opacity: 0.8;
+    }
+
+    /* Lado Direito - Formulário de Login */
+    .right-section {
+      flex: 0.8;
+      background-color: #12161f;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      border-left: 1px solid #1e2530;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .login-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 14px 16px;
+      background-color: #1c222e;
+      border: 1px solid #2a3242;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .input-field::placeholder {
+      color: #8e9aaf;
+    }
+
+    .input-field:focus {
+      border-color: #4a5568;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 12px;
+      background-color: #00427c;
+      color: #ffffff;
+      border: none;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 4px;
+      opacity: 0.7;
+      transition: background-color 0.2s;
+    }
+
+    .btn-submit:hover {
+      opacity: 1;
+      background-color: #00569e;
+    }
+
+    .forgot-password {
+      text-align: center;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin: 8px 0;
+    }
+
+    .btn-facebook {
+      width: 100%;
+      padding: 12px;
+      background-color: #1c222e;
+      color: #ffffff;
+      border: none;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-create-account {
+      width: 100%;
+      padding: 12px;
+      background-color: transparent;
+      color: #0095f6;
+      border: 1px solid #0095f6;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .meta-logo {
+      text-align: center;
+      margin-top: 24px;
+      color: #8e9aaf;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Rodapé */
+    footer {
+      padding: 20px 40px;
+      background-color: #0c0f14;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.75rem;
+      color: #8e9aaf;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: #8e9aaf;
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      display: flex;
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+      .left-section {
+        display: none;
+      }
+      .right-section {
+        border-left: none;
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Lado Esquerdo -->
+    <div class="left-section">
+      <svg class="instagram-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </svg>
+
+      <h1 class="hero-title">
+        Veja momentos do dia a dia dos seus <span class="gradient-text">amigos próximos.</span>
+      </h1>
+
+      <div class="cards-container">
+        <div class="mock-card card-left"></div>
+        <div class="mock-card card-right"></div>
+        <div class="mock-card card-center"></div>
+      </div>
+    </div>
+
+    <!-- Lado Direito -->
+    <div class="right-section">
+      <div class="login-box">
+        <h2 class="login-title">Entrar no Instagram</h2>
+
+        <input type="text" class="input-field" placeholder="Número de celular, nome de usuário ou email" />
+        <input type="password" class="input-field" placeholder="Senha" />
+
+        <button class="btn-submit">Entrar</button>
+
+        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+
+        <button class="btn-facebook">
+          <span>f</span> Entrar com o Facebook
+        </button>
+
+        <a href="#" class="btn-create-account">Criar nova conta</a>
+
+        <div class="meta-logo">
+          <span>∞ Meta</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="footer-links">
+      <a href="#">Meta</a>
+      <a href="#">Sobre</a>
+      <a href="#">Blog</a>
+      <a href="#">Carreiras</a>
+      <a href="#">Ajuda</a>
+      <a href="#">API</a>
+      <a href="#">Privacidade</a>
+      <a href="#">Termos</a>
+      <a href="#">Localizações</a>
+      <a href="#">Popular</a>
+      <a href="#">Instagram Lite</a>
+      <a href="#">Meta AI</a>
+      <a href="#">Threads</a>
+    </div>
+    <div class="footer-bottom">
+      <span>Português (Brasil) ˅</span>
+      <span>© 2026 Instagram from Meta</span>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
