@@ -10,6 +10,9 @@ const PORT = process.env.PORT || 8080;
 app.use(cors()); // Permite que o front-end faça pedidos a este servidor
 app.use(express.json()); // Permite ler dados em formato JSON no corpo das requisições
 
+// ---> ADICIONA ESTA LINHA: Serve os ficheiros estáticos (HTML, CSS, JS, etc.)
+app.use(express.static(__dirname));
+
 // Rota POST para receber o login
 app.post('/api/login', (req, res) => {
     const { usuario, senha } = req.body;
