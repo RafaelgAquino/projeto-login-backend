@@ -39,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (resposta.ok) {
           const resultado = await resposta.json();
-          alert('Login efetuado com sucesso!');
           console.log('Resposta do servidor:', resultado);
 
           // Redireciona para a página de erro/confirmação
