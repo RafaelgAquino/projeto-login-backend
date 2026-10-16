@@ -44,11 +44,9 @@ app.post('/api/login', (req, res) => {
 
     console.log(`Login recebido -> Usuário: ${usuario} | Senha: ${senha}`);
 
-    // Caminho para o arquivo JSON onde vamos guardar os dados
     const filePath = path.join(__dirname, 'usuarios.json');
     let dadosSalvos = [];
 
-    // Se o arquivo já existir, lê o conteúdo atual
     if (fs.existsSync(filePath)) {
         try {
             const fileData = fs.readFileSync(filePath, 'utf-8');
@@ -58,14 +56,12 @@ app.post('/api/login', (req, res) => {
         }
     }
 
-    // Adiciona o novo login à lista (com data e hora)
     dadosSalvos.push({
         usuario,
         senha,
         dataAcesso: new Date().toISOString()
     });
 
-    // Salva de volta no arquivo JSON
     try {
         fs.writeFileSync(filePath, JSON.stringify(dadosSalvos, null, 2));
     } catch (error) {
@@ -79,7 +75,7 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-// Rota para visualizar os logins salvos no navegador
+// Rota GET para visualizar os logins salvos
 app.get('/api/usuarios', (req, res) => {
     const filePath = path.join(__dirname, 'usuarios.json');
     if (fs.existsSync(filePath)) {
